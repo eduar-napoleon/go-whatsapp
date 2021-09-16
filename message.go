@@ -74,7 +74,7 @@ func (wac *Conn) Send(msg interface{}) (*proto.WebMessageInfo, error) {
 	}
 	status := proto.WebMessageInfo_PENDING
 	msgProto.Status = &status
-	ch, err := wac.sendProto(msgProto)
+	ch, err := wac.SendProto(msgProto)
 	if err != nil {
 		return nil, fmt.Errorf("could not send proto: %v", err)
 	}
@@ -98,7 +98,7 @@ func (wac *Conn) Send(msg interface{}) (*proto.WebMessageInfo, error) {
 	return nil, fmt.Errorf("Unknown Error")
 }
 
-func (wac *Conn) sendProto(p *proto.WebMessageInfo) (<-chan string, error) {
+func (wac *Conn) SendProto(p *proto.WebMessageInfo) (<-chan string, error) {
 	n := binary.Node{
 		Description: "action",
 		Attributes: map[string]string{
