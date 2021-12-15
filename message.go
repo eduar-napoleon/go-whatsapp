@@ -998,6 +998,10 @@ func ParseNodeMessage(msg binary.Node) interface{} {
 	case "user":
 		return getNewContact(msg.Attributes)
 	default:
+		str, err := json.Marshal(msg)
+		if err == nil {
+			return string(str)
+		}
 		//cannot match message
 	}
 
